@@ -25,17 +25,14 @@ var questions = [{
     },
     {
         question: "Inside which HTML element do we put the JavaScript code?",
-        answers: ["<script>", "<javascript>", "<js>"],
+        answers: ["script", "javascript", "js"],
         correctAnswer: "<script>"
     }
 
 ]
 
 // We can always loop through arrays.
-function startGame() {
 
-
-}
 var time = 0;
 
 function gamePlay() {
@@ -50,7 +47,7 @@ function timeCount() {
     time = 10;
     interval = setInterval(timeRemaining, 1000);
     //add a new div to btn container
-    $(".btnContainer").append('<div class="timeRem">' + "Time Remaining: " + '<div class="timerCountDown"></div>' + "</div>");
+    $(".timer").append('<div class="timeRem">' + "Time Remaining: " + '<div class="timerCountDown"></div>' + "</div>");
 }
 
 function timeRemaining() {
@@ -69,16 +66,27 @@ function timeRemaining() {
         // removes ques
         $(".questionInput").remove();
         // displays "time is up" if the time reaches 0
-        $(".btnContainer").append("<div class ='timeIsUp'> Time is up </div>");
+        $(".timer").append("<div class ='timeIsUp'> Time is up </div>" + "<p>correct answer is:" + questions[currentQuestion].correctAnswer + "</p>");
+        // $(".btnContainer").append(`<p>"${questions[currentQuestion].correctAnswer}" is the actual one</p>`)
         disCorAnsw();
     }
 }
 
 function disCorAnsw() {
+    //Clear and then append
+    $(".btnContainer").empty();
+
     $(".btnContainer").append('<div class="questionInput">' + questions[currentQuestion].question + "</div>");
     $(".btnContainer").append('<button class="answerVal">' + questions[currentQuestion].answers[0] + "</button>");
     $(".btnContainer").append('<button class="answerVal">' + questions[currentQuestion].answers[1] + "</button>");
     $(".btnContainer").append('<button class="answerVal">' + questions[currentQuestion].answers[2] + "</button>");
+    setTimeout(function () {
+        $("div").remove(".corAnsw");
+        $("div").remove(".timeRem");
+        $("div").remove(".timeIsUp");
+
+        timeCount();
+    });
 }
 
 
@@ -92,11 +100,18 @@ $("body").on("click", ".answerVal", function () {
         correctAnswer++;
     } else {
         alert("Wrong answer the correct answer is  " + questions[currentQuestion].correctAnswer);
+        wrongAnswers++
     }
     // else display the correct answer 
     clearInterval(interval);
     currentQuestion++
-    disCorAnsw()
+    if (currentQuestion >= questions.length) {
+        alert("GAME OVER")
+    } else {
+        disCorAnsw()
+
+    }
+    //for(var i=0; i > questions.length; i++
 });
 
 gamePlay();
@@ -107,4 +122,5 @@ gamePlay();
 // if its right display "Nailed it" and increase correct answer count by 1  
 // if its wrong display "wrong right answ is "
 // if time is up display time is up and right answer
-// display 2nd quest
+// display 2nd question
+// End the game and tell the person their score.
