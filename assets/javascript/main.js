@@ -31,7 +31,9 @@ var questions = [{
 
 ]
 
+// We can always loop through arrays.
 function startGame() {
+
 
 }
 var time = 0;
@@ -39,7 +41,6 @@ var time = 0;
 function gamePlay() {
     $(".startBtn").on("click", function () {
         $(".startBtn").hide();
-        currentQuestion++
         timeCount();
         disCorAnsw();
     });
@@ -71,34 +72,39 @@ function timeRemaining() {
         $(".btnContainer").append("<div class ='timeIsUp'> Time is up </div>");
         disCorAnsw();
     }
-
-    function disCorAnsw() {
-        $(".btnContainer").append('<div class="questionInput">' + questions[currentQuestion].question + "</div>");
-        $(".btnContainer").append('<button class="answerVal" value=1>' + questions[currentQuestion].answers[0] + "</button>");
-        $(".btnContainer").append('<button class="answerVal" value=0>' + questions[currentQuestion].answers[1] + "</button>");
-        $(".btnContainer").append('<button class="answerVal" value=0>' + questions[currentQuestion].answers[2] + "</button>");
-    }
-
-
-    $("body").on("click", ".answerVal", function () {
-        console.log("Clicked")
-
-
-        current_question++
-
-
-
-        disCorAnsw()
-    });
-
-
 }
+
+function disCorAnsw() {
+    $(".btnContainer").append('<div class="questionInput">' + questions[currentQuestion].question + "</div>");
+    $(".btnContainer").append('<button class="answerVal">' + questions[currentQuestion].answers[0] + "</button>");
+    $(".btnContainer").append('<button class="answerVal">' + questions[currentQuestion].answers[1] + "</button>");
+    $(".btnContainer").append('<button class="answerVal">' + questions[currentQuestion].answers[2] + "</button>");
+}
+
+
+$("body").on("click", ".answerVal", function () {
+    console.log("Clicked")
+    var checkRightAnswer = $(this).text();
+    console.log($(this).text())
+    // If the value is eqaul to the correct answer, celebrate
+    if (questions[currentQuestion].correctAnswer === checkRightAnswer) {
+        alert("Nailed it")
+        correctAnswer++;
+    } else {
+        alert("Wrong answer the correct answer is  " + questions[currentQuestion].correctAnswer);
+    }
+    // else display the correct answer 
+    clearInterval(interval);
+    currentQuestion++
+    disCorAnsw()
+});
+
 gamePlay();
 
 // set the timer
-//display 1st quest and time remaining 
-//user clicks to selects the ansver
-// if its right display "correct right answer" 
-//if its wrong display "wrong right answ is "
-//if time is up display time is up and right answer
+// display 1st question and time remaining 
+// user clicks to select the answer
+// if its right display "Nailed it" and increase correct answer count by 1  
+// if its wrong display "wrong right answ is "
+// if time is up display time is up and right answer
 // display 2nd quest

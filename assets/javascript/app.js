@@ -241,7 +241,10 @@ function quest3() {
   );
   $(".btnContainer").append(
     '<button class="answerVal" value=0>' + answers.answers3[3] + "</button>"
-  );
+
+
+
+    );
 }
 function chooseCheckAnswer() {
   $("button").on("click", function() {
