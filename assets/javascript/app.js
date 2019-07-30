@@ -17,21 +17,19 @@ var answers = {
     3: "Cascading Style Sheets"
   },
   answers3: {
-    1: "<script>",
-    2: "<javascript>",
-    3: "<js>"
+    1: "script",
+    2: "javascript",
+    3: "js"
   }
 };
 var current_question = 0;
 // When the user clicks the button, increase the current question.
 
-var justinss_queue = [
-  {
-    question: "Whats my name",
-    answers: ["One", "two", "three"],
-    correctAnswer: "two"
-  }
-];
+var justinss_queue = [{
+  question: "Whats my name",
+  answers: ["One", "two", "three"],
+  correctAnswer: "two"
+}];
 console.log(justinss_queue[current_question].question);
 // Global vars
 var time;
@@ -44,7 +42,7 @@ var isCorrect = false;
 function startGame() {}
 
 function gamePlay() {
-  $(".startBtn").on("click", function() {
+  $(".startBtn").on("click", function () {
     $(".startBtn").hide();
     timeCount();
     quest1();
@@ -58,9 +56,9 @@ function timeCount() {
   //add a new div to btn container
   $(".btnContainer").append(
     '<div class="timeRem">' +
-      "Time Remaining: " +
-      '<div class="timerCountDown"></div>' +
-      "</div>"
+    "Time Remaining: " +
+    '<div class="timerCountDown"></div>' +
+    "</div>"
   );
 }
 // Prints time rem to the DOM and once it 0 timer stops
@@ -95,7 +93,7 @@ function disCorAnsw() {
       "Wrong!" + "The correct answer is   " + answers.answers1[1]
     );
     $(".btnContainer").append(correctAnswers);
-    setTimeout(function() {
+    setTimeout(function () {
       $("div").remove(".corAnsw");
       $("div").remove(".timeRem");
       $("div").remove(".timeIsUp");
@@ -111,7 +109,7 @@ function disCorAnsw() {
     correctAnswers = newDiv.text("Correct!");
     $(".btnContainer").append(correctAnswers);
 
-    setTimeout(function() {
+    setTimeout(function () {
       isCorrect = false;
       $("div").remove(".corAnsw");
       $("div").remove(".timeRem");
@@ -130,7 +128,7 @@ function disCorAnsw() {
       "Wrong!" + "The correct answer is   " + answers.answers1[1]
     );
     $(".btnContainer").append(correctAnswers);
-    setTimeout(function() {
+    setTimeout(function () {
       $("div").remove(".corAnsw");
       $("div").remove(".timeRem");
       $("div").remove(".timeIsUp");
@@ -146,7 +144,7 @@ function disCorAnsw() {
     correctAnswers = newDiv.text("Correct!");
     $(".btnContainer").append(correctAnswers);
 
-    setTimeout(function() {
+    setTimeout(function () {
       isCorrect = false;
 
       $("div").remove(".corAnsw");
@@ -166,7 +164,7 @@ function disCorAnsw() {
       "Wrong!" + "The correct answer is   " + answers.answers1[1]
     );
     $(".btnContainer").append(correctAnswers);
-    setTimeout(function() {
+    setTimeout(function () {
       $("div").remove(".corAnsw");
       $("div").remove(".timeRem");
       $("div").remove(".timeIsUp");
@@ -181,7 +179,7 @@ function disCorAnsw() {
     correctAnswers = newDiv.text("Correct!");
     $(".btnContainer").append(correctAnswers);
 
-    setTimeout(function() {
+    setTimeout(function () {
       isCorrect = false;
 
       $("div").remove(".corAnsw");
@@ -193,9 +191,11 @@ function disCorAnsw() {
     }, 5000);
   }
 }
+
 function show_question(question) {
   console.log(question);
 }
+
 function quest1(question) {
   qCounter++;
   // add questions to questionInput div
@@ -213,6 +213,7 @@ function quest1(question) {
     '<button class="answerVal" value=0>' + answers.answers1[3] + "</button>"
   );
 }
+
 function quest2() {
   qCounter++;
   $(".btnContainer").append(
@@ -228,6 +229,7 @@ function quest2() {
     '<button class="answerVal" value=1>' + answers.answers2[3] + "</button>"
   );
 }
+
 function quest3() {
   qCounter++;
   $(".btnContainer").append(
@@ -244,10 +246,33 @@ function quest3() {
 
 
 
-    );
+  );
 }
+
+function endGame() {
+  $(".btnContainer").append("<div class='gameOver'>All done, here is how you did!</div>" + "<div class='gameOver'> Correct:" + correctAnswers + "</div>" + "<div class='gameOver'> Wrong:" + wrongAnswers + "</div>");
+  resetGame()
+}
+
+function resetGame() {
+  $(".btnContainer").append("<button class'reset'>reset</button>");
+  $(".reset").on("click", function () {
+    $("div").remove(".gameOver");
+    $("button").remove("reset");
+    qCounter = 0;
+    correctAnswers = 0;
+    wrongAnswers = 0;
+    isCorrect = false;
+
+    timeCount();
+    quest2();
+    chooseCheckAnswer();
+
+  });
+}
+
 function chooseCheckAnswer() {
-  $("button").on("click", function() {
+  $("button").on("click", function () {
     //gets the value attr of which ever button is clicked
     var checkRightAnswer = $(this).attr("value");
     console.log(checkRightAnswer);
@@ -270,4 +295,3 @@ function chooseCheckAnswer() {
   });
 }
 gamePlay();
-show_question(justinss_queue[current_question]);

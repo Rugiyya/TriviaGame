@@ -75,18 +75,10 @@ function timeRemaining() {
 function disCorAnsw() {
     //Clear and then append
     $(".btnContainer").empty();
-
     $(".btnContainer").append('<div class="questionInput">' + questions[currentQuestion].question + "</div>");
     $(".btnContainer").append('<button class="answerVal">' + questions[currentQuestion].answers[0] + "</button>");
     $(".btnContainer").append('<button class="answerVal">' + questions[currentQuestion].answers[1] + "</button>");
     $(".btnContainer").append('<button class="answerVal">' + questions[currentQuestion].answers[2] + "</button>");
-    setTimeout(function () {
-        $("div").remove(".corAnsw");
-        $("div").remove(".timeRem");
-        $("div").remove(".timeIsUp");
-
-        timeCount();
-    });
 }
 
 
@@ -96,7 +88,8 @@ $("body").on("click", ".answerVal", function () {
     console.log($(this).text())
     // If the value is eqaul to the correct answer, celebrate
     if (questions[currentQuestion].correctAnswer === checkRightAnswer) {
-        alert("Nailed it")
+
+        //alert("Nailed it")
         correctAnswer++;
     } else {
         alert("Wrong answer the correct answer is  " + questions[currentQuestion].correctAnswer);
