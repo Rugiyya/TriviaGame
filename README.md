@@ -2,7 +2,7 @@
 
 ## About the app 
 
-Totally is a web based game, where a user has to answer a set of 8 questions within 90 seconds. The user can only chose one answer per question. The game ends, if the 90 second timer runs out or if the user has clicked on the DONE button to finish the game. At the end of the game,the user will see a summary of results.
+Trivia is a web based game, where a user has to answer a set of 8 questions within 90 seconds. The user can only chose one answer per question. The game ends, if the 90 second timer runs out or if the user has clicked on the DONE button to finish the game. At the end of the game,the user will see a summary of results.
 
 ## TECHNOLOGIES USED
   * Javascript
