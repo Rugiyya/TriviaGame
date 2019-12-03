@@ -1,33 +1,42 @@
-h1 {
-    text-align: center;
+body {
+    background-image: url("../images/background.png");
+    color: white;
+    text-align: left;
+    font-family: cursive;
 }
 
-.jumbotron {
-    height: 700px;
+.cover-heading{
+    margin-top: 40px;
+    font-size: 80px;
 }
 
-.startBtn {
-    width: 200px;
+#game-start{
+    margin-top: 70px;
+    font-size: 40px;
 }
 
-.btnContainer {
-    margin-top: 120px;
-    margin-right: 10px;
+#countdown {
+    font-size: 26px;
+    color:rgb(201, 12, 12);
+}
+
+#game-done {
+    font-size: 40px;
+}
+
+.lead2 {
+    font-size: 30px;
+    color: rgb(206, 171, 102);
 }
 
 .quest {
-    font-size: 20px;
+    font-size: 26px;
+    color: rgb(206, 171, 102);
 }
 
-.timeRem {
+.text-mysize {
     font-size: 20px;
 }
-
-.questionInput {
-    font-size: 30px;
-    display: inline;
-}
-
-.correctAnswers {
-    font-size: 20px;
+.optradio{
+    margin-right: 5px;
 }

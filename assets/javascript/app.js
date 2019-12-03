@@ -1,297 +1,90 @@
-var questions = {
-  q1: "What does HTML stand for?",
+// JS file for HOMEWORK #5 
 
-  q2: "What does CSS stand for?",
+$(document).ready(function () {
+  // when the page is loaded first, the timer, questions and summary must be hidden.
 
-  q3: "Inside which HTML element do we put the JavaScript code?"
-};
-var answers = {
-  answers1: {
-    1: "Hypertext Markup Lauguage",
-    2: "HyperLink and Text Markup Languges",
-    3: "Home Tool markup Launguage"
-  },
-  answers2: {
-    1: "Computer Style Sheet",
-    2: "Colorful Style Sheets",
-    3: "Cascading Style Sheets"
-  },
-  answers3: {
-    1: "script",
-    2: "javascript",
-    3: "js"
+  $('#countdown').hide();
+  $('.trivia-ques').hide();
+  $('.results').hide();
+
+  // Declare Variables
+  var number = 90; //number of seconds
+  var intervalId;
+  var correctCount = 0;
+  var wrongCount = 0;
+  var unanswered = 0;
+
+  //ALL FUNCTIONS
+
+  // function to show questions
+  function showQuestions() {
+    $('#countdown').show();
+    $('.trivia-ques').show();
+    $('#game-done').show();
   }
-};
-var current_question = 0;
-// When the user clicks the button, increase the current question.
 
-var justinss_queue = [{
-  question: "Whats my name",
-  answers: ["One", "two", "three"],
-  correctAnswer: "two"
-}];
-console.log(justinss_queue[current_question].question);
-// Global vars
-var time;
-var correctAnswers = 0;
-var wrongAnswers = 0;
-var qCounter = 0;
-var interval;
-var isCorrect = false;
-// Functions
-function startGame() {}
-
-function gamePlay() {
-  $(".startBtn").on("click", function () {
-    $(".startBtn").hide();
-    timeCount();
-    quest1();
-    chooseCheckAnswer();
-  });
-}
-
-function timeCount() {
-  time = 10;
-  interval = setInterval(timeRemaining, 1000);
-  //add a new div to btn container
-  $(".btnContainer").append(
-    '<div class="timeRem">' +
-    "Time Remaining: " +
-    '<div class="timerCountDown"></div>' +
-    "</div>"
-  );
-}
-// Prints time rem to the DOM and once it 0 timer stops
-function timeRemaining() {
-  // decrement time by 1
-  time--;
-  //prints time rem
-  $(".timerCountDown").text(time + "  seconds");
-  console.log(time);
-  //if reaches 0
-  if (time === 0) {
-    console.log("time = " + time);
-    // stops time at 0
-    clearInterval(interval);
-    //removes bnt answ
-    $("button").remove();
-    // removes ques
-    $(".questionInput").remove();
-    // displays "time is up" if the time reaches 0
-    $(".btnContainer").append("<div class ='timeIsUp'> Time is up </div>");
-    disCorAnsw();
+  // function for timer
+  function countdownTimer() {
+    intervalId = setInterval(decrement, 1000);
   }
-}
-// Display correct answer counter1 q1
 
-function disCorAnsw() {
-  // 1st ques
-  if (qCounter === 1 && isCorrect === false) {
-    wrongAnswers++;
-    var newDiv = $("<div class='corAnsw'>");
-    correctAnswers = newDiv.text(
-      "Wrong!" + "The correct answer is   " + answers.answers1[1]
-    );
-    $(".btnContainer").append(correctAnswers);
-    setTimeout(function () {
-      $("div").remove(".corAnsw");
-      $("div").remove(".timeRem");
-      $("div").remove(".timeIsUp");
-
-      timeCount();
-      quest2();
-      chooseCheckAnswer();
-    }, 5000);
-  } else if (qCounter === 1 && isCorrect === true) {
-    correctAnswers++;
-    // display correct
-    var newDiv = $("<div class='corAnsw'>");
-    correctAnswers = newDiv.text("Correct!");
-    $(".btnContainer").append(correctAnswers);
-
-    setTimeout(function () {
-      isCorrect = false;
-      $("div").remove(".corAnsw");
-      $("div").remove(".timeRem");
-      $("div").remove(".timeIsUp");
-
-      timeCount();
-      quest2();
-      chooseCheckAnswer();
-    }, 5000);
-  }
-  //2nd quest
-  else if (qCounter === 2 && isCorrect === false) {
-    wrongAnswers++;
-    var newDiv = $("<div class='corAnsw'>");
-    correctAnswers = newDiv.text(
-      "Wrong!" + "The correct answer is   " + answers.answers1[1]
-    );
-    $(".btnContainer").append(correctAnswers);
-    setTimeout(function () {
-      $("div").remove(".corAnsw");
-      $("div").remove(".timeRem");
-      $("div").remove(".timeIsUp");
-
-      timeCount();
-      quest3();
-      chooseCheckAnswer();
-    }, 5000);
-  } else if (qCounter === 2 && isCorrect === true) {
-    correctAnswers++;
-    // display correct
-    var newDiv = $("<div class='corAnsw'>");
-    correctAnswers = newDiv.text("Correct!");
-    $(".btnContainer").append(correctAnswers);
-
-    setTimeout(function () {
-      isCorrect = false;
-
-      $("div").remove(".corAnsw");
-      $("div").remove(".timeRem");
-      $("div").remove(".timeIsUp");
-
-      timeCount();
-      quest3();
-      chooseCheckAnswer();
-    }, 5000);
-  }
-  // 3rd quest
-  else if (qCounter === 3 && isCorrect === false) {
-    wrongAnswers++;
-    var newDiv = $("<div class='corAnsw'>");
-    correctAnswers = newDiv.text(
-      "Wrong!" + "The correct answer is   " + answers.answers1[1]
-    );
-    $(".btnContainer").append(correctAnswers);
-    setTimeout(function () {
-      $("div").remove(".corAnsw");
-      $("div").remove(".timeRem");
-      $("div").remove(".timeIsUp");
-
-      timeCount();
-      chooseCheckAnswer();
-    }, 5000);
-  } else if (qCounter === 3 && isCorrect === true) {
-    correctAnswers++;
-    // display correct
-    var newDiv = $("<div class='corAnsw'>");
-    correctAnswers = newDiv.text("Correct!");
-    $(".btnContainer").append(correctAnswers);
-
-    setTimeout(function () {
-      isCorrect = false;
-
-      $("div").remove(".corAnsw");
-      $("div").remove(".timeRem");
-      $("div").remove(".timeIsUp");
-
-      timeCount();
-      chooseCheckAnswer();
-    }, 5000);
-  }
-}
-
-function show_question(question) {
-  console.log(question);
-}
-
-function quest1(question) {
-  qCounter++;
-  // add questions to questionInput div
-  $(".btnContainer").append(
-    '<div class="questionInput">' + questions.q1 + "</div>"
-  );
-  // add answers
-  $(".btnContainer").append(
-    '<button class="answerVal" value=1>' + answers.answers1[1] + "</button>"
-  );
-  $(".btnContainer").append(
-    '<button class="answerVal" value=0>' + answers.answers1[2] + "</button>"
-  );
-  $(".btnContainer").append(
-    '<button class="answerVal" value=0>' + answers.answers1[3] + "</button>"
-  );
-}
-
-function quest2() {
-  qCounter++;
-  $(".btnContainer").append(
-    '<div class="questionInput">' + questions.q2 + "</div>"
-  );
-  $(".btnContainer").append(
-    '<button class="answerVal" value=0>' + answers.answers2[1] + "</button>"
-  );
-  $(".btnContainer").append(
-    '<button class="answerVal" value=0>' + answers.answers2[2] + "</button>"
-  );
-  $(".btnContainer").append(
-    '<button class="answerVal" value=1>' + answers.answers2[3] + "</button>"
-  );
-}
-
-function quest3() {
-  qCounter++;
-  $(".btnContainer").append(
-    '<div class="questionInput">' + questions.q3 + "</div>"
-  );
-  $(".btnContainer").append(
-    '<button class="answerVal" value=1>' + answers.answers3[1] + "</button>"
-  );
-  $(".btnContainer").append(
-    '<button class="answerVal" value=0>' + answers.answers3[2] + "</button>"
-  );
-  $(".btnContainer").append(
-    '<button class="answerVal" value=0>' + answers.answers3[3] + "</button>"
-
-
-
-  );
-}
-
-function endGame() {
-  $(".btnContainer").append("<div class='gameOver'>All done, here is how you did!</div>" + "<div class='gameOver'> Correct:" + correctAnswers + "</div>" + "<div class='gameOver'> Wrong:" + wrongAnswers + "</div>");
-  resetGame()
-}
-
-function resetGame() {
-  $(".btnContainer").append("<button class'reset'>reset</button>");
-  $(".reset").on("click", function () {
-    $("div").remove(".gameOver");
-    $("button").remove("reset");
-    qCounter = 0;
-    correctAnswers = 0;
-    wrongAnswers = 0;
-    isCorrect = false;
-
-    timeCount();
-    quest2();
-    chooseCheckAnswer();
-
-  });
-}
-
-function chooseCheckAnswer() {
-  $("button").on("click", function () {
-    //gets the value attr of which ever button is clicked
-    var checkRightAnswer = $(this).attr("value");
-    console.log(checkRightAnswer);
-    // stops the time when a anw is selected
-    clearInterval(interval);
-    // if the attr value of check ans is = value one
-    if (checkRightAnswer === 1) {
-      console.log("Correct");
-      //remove button answers
-      // $("button").remove();
-      // //removes ques
-      // $(".questionInput").remove();
-      $(".btnContainer").empty();
-      $(".questionInput").empty();
-    } else {
-      $(".btnContainer").empty();
-      $(".questionInput").empty();
+  // function to decrement timer
+  function decrement() {
+    number--;
+    $('#timer').html(" " + number + " " + "seconds");
+    if (number === 1) {
+      $('#timer').html(" " + number + " " + "second");
     }
-    disCorAnsw();
+    else if (number === 0) {
+      stop();
+      hide();
+      displaySummary();
+    }
+  }
+
+  //function to clear timer
+  function stop() {
+    clearInterval(intervalId);
+  }
+
+  //function to hide text after questions are answered or timer out
+  function hide() {
+    $('#countdown').hide();
+    $('.trivia-ques').hide();
+    $('#game-done').hide();
+  }
+
+  // function to display summary of game
+  function displaySummary() {
+    $('.results').show();
+    unanswered = (8 - (correctCount + wrongCount));
+    $('#correctScore').text("Correct Answers:" + " " + correctCount);
+    $('#wrongScore').text("Wrong Answers:" + " " + wrongCount);
+    $('#unanswered').text("Unanswered:" + " " + unanswered);
+  }
+
+  // CLICK EVENTS
+
+  //Clicking Start Button
+  $('#game-start').on('click', function () {
+    $('#game-start').hide();
+    showQuestions();
+    countdownTimer();
   });
-}
-gamePlay();
+
+  //Clicking Done Button
+  $('#game-done').on('click', function () {
+    $('#game-start').hide();
+    hide();
+    displaySummary();
+  });
+
+  //Clicking Radio button
+  $('input[type=radio]').on('change', function () {
+    correctCount = $('input[value=correct]:checked').length;
+    wrongCount = $('input[value=wrong]:checked').length;
+    unanswered = (8 - (correctCount + wrongCount));
+  });
+
+  // Last closing bracket
+});
