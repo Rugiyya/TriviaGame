@@ -7,7 +7,7 @@ $(document).ready(function () {
   $('.trivia-ques').hide();
   $('.results').hide();
 
-  // Declare Variables
+  // Variables
   var number = 90; //number of seconds
   var intervalId;
   var correctCount = 0;
@@ -86,5 +86,5 @@ $(document).ready(function () {
     unanswered = (8 - (correctCount + wrongCount));
   });
 
-  // Last closing bracket
+
 });
