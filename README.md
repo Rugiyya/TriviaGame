@@ -20,4 +20,4 @@ Trivia is a web based game, where a user has to answer a set of 8 questions with
  
  [Here](https://rugiyya.github.io/TriviaGame/)
   
-  #### Creator: *Rugiya Mammadov*
+  #### Creator: *Rugiyya Mammadov*
